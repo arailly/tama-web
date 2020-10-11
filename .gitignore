@@ -5,5 +5,8 @@
 /venv/*
 !pyvenv.cfg
 
-/data/*
-!sample.csv
+/data/passages/*
+!/data/passages/sample.csv
+
+/data/trajectories/*
+!/data/trajectories/sample.csv
