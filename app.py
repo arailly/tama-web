@@ -27,6 +27,23 @@ def passages():
         return 'success'
 
 
+@app.route('/trajectories', methods=['GET', 'POST'])
+def trajectories():
+    trajectory_dir = 'data/trajectories'
+
+    if request.method == 'GET':
+        files = os.listdir(trajectory_dir)
+        return jsonify({
+            'files': files
+        })
+
+    elif request.method == 'POST':
+        f = request.files['trajectory_file']
+        save_path = f'{trajectory_dir}/trajectory-{get_now_str()}.csv'
+        f.save(save_path)
+        return 'success'
+
+
 def get_now_str():
     now = datetime.datetime.now()
     return now.strftime('%Y-%m-%d-%H-%M-%S')
