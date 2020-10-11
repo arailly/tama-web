@@ -11,8 +11,10 @@ def hello_world():
 
 @app.route('/passages', methods=['GET', 'POST'])
 def passages():
+    passage_dir = 'data/passages'
+
     if request.method == 'GET':
-        return jsonify(passages_handler.index())
+        return jsonify(passages_handler.index(passage_dir))
 
 
 if __name__ == '__main__':

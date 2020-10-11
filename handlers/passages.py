@@ -1,7 +1,7 @@
 import os
 
 
-def index(passage_path: str) -> dict:
+def index(passage_dir: str) -> dict:
     return {
-        'files': os.listdir(passage_path)
+        'files': os.listdir(passage_dir)
     }
