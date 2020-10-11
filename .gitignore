@@ -2,5 +2,5 @@
 .idea/**/usage.statistics.xml
 .idea/**/tasks.xml
 
-/venv
+/venv/*
 !pyvenv.cfg
