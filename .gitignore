@@ -4,3 +4,6 @@
 
 /venv/*
 !pyvenv.cfg
+
+/data/*
+!sample.csv
