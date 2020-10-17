@@ -20,7 +20,7 @@ def api_index():
 @app.route('/passages', methods=['GET'])
 def passages():
     passage = Passage()
-    passage.load('data/passages/passages-a202.csv')
+    passage.load('data/passages/a202.csv')
     return render_template('passage.html', passage=passage.to_json())
 
 
