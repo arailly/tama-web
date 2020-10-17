@@ -1,6 +1,6 @@
 import os
-import datetime
 from flask import Flask, request, jsonify, render_template
+from helper import get_now_str, Passage
 
 app = Flask(__name__)
 
@@ -15,6 +15,13 @@ def api_index():
     return jsonify({
         'message': 'hello world'
     })
+
+
+@app.route('/passages', methods=['GET'])
+def passages():
+    passage = Passage()
+    passage.load('data/passages/passages-a202.csv')
+    return render_template('passage.html', passage=passage.to_json())
 
 
 @app.route('/api/passages', methods=['GET', 'POST'])
@@ -51,10 +58,5 @@ def api_trajectories():
         return 'success'
 
 
-def get_now_str():
-    now = datetime.datetime.now()
-    return now.strftime('%Y-%m-%d-%H-%M-%S')
-
-
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

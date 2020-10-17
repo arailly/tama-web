@@ -1,4 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Passage</h1>
+<canvas id="canvas" width="1600" height="1000"></canvas>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const passages = {{ passage|tojson }}
+
+    ctx.lineWidth = 10
+
+    Object.keys(passages).forEach((i) => {
+        const passage = passages[i];
+        ctx.moveTo(passage.xbegin * 100, -passage.ybegin * 100);
+        ctx.lineTo(passage.xend * 100, -passage.yend * 100)
+    })
+
+    ctx.stroke();
+})
+</script>
 {% endblock %}
