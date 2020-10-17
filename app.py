@@ -1,17 +1,24 @@
 import os
 import datetime
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def index():
+    return render_template('index.html')
+
+
+@app.route('/api')
+def api_index():
+    return jsonify({
+        'message': 'hello world'
+    })
 
 
 @app.route('/api/passages', methods=['GET', 'POST'])
-def passages():
+def api_passages():
     passage_dir = 'data/passages'
 
     if request.method == 'GET':
@@ -28,7 +35,7 @@ def passages():
 
 
 @app.route('/api/trajectories', methods=['GET', 'POST'])
-def trajectories():
+def api_trajectories():
     trajectory_dir = 'data/trajectories'
 
     if request.method == 'GET':
