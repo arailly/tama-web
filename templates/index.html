@@ -1,4 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Home</h1>
+    <h1>Home</h1>
+    <h2>Select Passage and Trajectory</h2>
+    <h3>Passages</h3>
+    <ul>
+    {% for passage_file in passage_files %}
+    <li>{{ passage_file }}</li>
+    {% endfor %}
+    </ul>
+
+    <h3>Trajectories</h3>
+    <ul>
+    {% for trajectory_file in trajectory_files %}
+    <li>{{ trajectory_file }}</li>
+    {% endfor %}
+    </ul>
 {% endblock %}
