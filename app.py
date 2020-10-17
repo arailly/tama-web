@@ -19,10 +19,17 @@ def api_index():
     })
 
 
-@app.route('/passages', methods=['GET'])
-def passages():
+# @app.route('/result/<string:passage_file>/<string:trajectory_file>')
+# def result(passage_file: str, trajectory_file: str):
+#     passage = h.Passage()
+#     passage.load('passage_file')
+#     return render_template('passage.html', passage=passage.to_json())
+
+
+@app.route('/result')
+def result():
     passage = h.Passage()
-    passage.load('data/passages/a202.csv')
+    passage.load('a202.csv')
     return render_template('passage.html', passage=passage.to_json())
 
 

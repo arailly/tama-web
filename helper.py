@@ -35,8 +35,8 @@ class Passage:
     def __init__(self):
         self.df = None
 
-    def load(self, path: str, **kwargs):
-        self.df = pd.read_csv(path, **kwargs)
+    def load(self, file: str, **kwargs):
+        self.df = pd.read_csv(f'{passage_dir}/{file}', **kwargs)
 
     def to_json(self) -> List[Dict]:
         return self.df.to_dict(orient='index')

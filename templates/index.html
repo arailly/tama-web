@@ -3,16 +3,19 @@
     <h1>Home</h1>
     <h2>Select Passage and Trajectory</h2>
     <h3>Passages</h3>
-    <ul>
     {% for passage_file in passage_files %}
-    <li>{{ passage_file }}</li>
+    <p>
+        <input type="radio" name="passage_file" value="{{ passage_file }}">
+        {{ passage_file }}
+    </p>
     {% endfor %}
-    </ul>
 
     <h3>Trajectories</h3>
-    <ul>
     {% for trajectory_file in trajectory_files %}
-    <li>{{ trajectory_file }}</li>
+    <p>
+        <input type="radio" name="trajectory_file" value="{{ trajectory_file }}">
+        {{ trajectory_file }}
+    </p>
     {% endfor %}
-    </ul>
+    <a href="{{ url_for('result') }}">See Result</a>
 {% endblock %}
