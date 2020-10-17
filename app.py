@@ -10,7 +10,7 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/passages', methods=['GET', 'POST'])
+@app.route('/api/passages', methods=['GET', 'POST'])
 def passages():
     passage_dir = 'data/passages'
 
@@ -27,7 +27,7 @@ def passages():
         return 'success'
 
 
-@app.route('/trajectories', methods=['GET', 'POST'])
+@app.route('/api/trajectories', methods=['GET', 'POST'])
 def trajectories():
     trajectory_dir = 'data/trajectories'
 
