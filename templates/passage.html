@@ -11,10 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ctx.lineWidth = 10
 
+    const shift = 50;
+    const power = 80;
+
     Object.keys(passages).forEach((i) => {
         const passage = passages[i];
-        ctx.moveTo(passage.xbegin * 100, -passage.ybegin * 100);
-        ctx.lineTo(passage.xend * 100, -passage.yend * 100)
+        ctx.moveTo(shift + passage.xbegin * power, shift + -passage.ybegin * power);
+        ctx.lineTo(shift + passage.xend * power, shift + -passage.yend * power)
     })
 
     ctx.stroke();
