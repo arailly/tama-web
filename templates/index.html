@@ -38,8 +38,8 @@
     <a
             id="next"
             href="{{ url_for('result',
-                    passage_file="",
-                    trajectory_file="") }}">
+                    passage="",
+                    trajectory="") }}">
     See matching result of passage ??? and trajectory ???
     </a>
 
@@ -54,7 +54,7 @@
         innerTextArray[5] = val
         next.innerText = innerTextArray.join(' ')
         // replace url
-        next.href = next.href.replace(/passage_file=*/, 'passage_file=' + val)
+        next.href = next.href.replace(/passage=*/, 'passage=' + val)
     }
 
     const onTrajectoryClick = () => {
@@ -64,7 +64,7 @@
         innerTextArray[8] = val
         next.innerText = innerTextArray.join(' ')
         //replace url
-        next.href = next.href.replace(/trajectory_file=*/, 'trajectory_file=' + val)
+        next.href = next.href.replace(/trajectory=*/, 'trajectory=' + val)
     }
     </script>
 {% endblock %}

@@ -19,17 +19,11 @@ def api_index():
     })
 
 
-# @app.route('/result/<string:passage_file>/<string:trajectory_file>')
-# def result(passage_file: str, trajectory_file: str):
-#     passage = h.Passage()
-#     passage.load('passage_file')
-#     return render_template('passage.html', passage=passage.to_json())
-
-
 @app.route('/result')
 def result():
     passage = h.Passage()
-    passage.load('a202.csv')
+    passage_file = request.args.get('passage')
+    passage.load(passage_file)
     return render_template('passage.html', passage=passage.to_json())
 
 
