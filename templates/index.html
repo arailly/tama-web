@@ -3,7 +3,7 @@
     <h1>Home</h1>
     <h2>Select Passage and Trajectory</h2>
     <h3>Passages</h3>
-    <form id="files">
+    <form id="files" action="result" method="get">
     {% for passage_file in passage_files %}
     <p>
         <label for="passage">
@@ -12,7 +12,7 @@
                 id="passage"
                 name="passage"
                 value="{{ passage_file }}"
-                onclick="onPassageClick()"
+                required
             >
         </label>
         {{ passage_file }}
@@ -28,43 +28,14 @@
                 id="trajectory"
                 name="trajectory"
                 value="{{ trajectory_file }}"
-                onclick="onTrajectoryClick()"
+                required
             >
         </label>
         {{ trajectory_file }}
     </p>
     {% endfor %}
+    <p>
+        <input class="button" type="submit">
+    </p>
     </form>
-    <a
-            id="next"
-            href="{{ url_for('result',
-                    passage="",
-                    trajectory="") }}">
-    See matching result of passage ??? and trajectory ???
-    </a>
-
-    <script>
-    const next = document.getElementById("next")
-    const files = document.getElementById("files")
-
-    const onPassageClick = () => {
-        const val = files.passage.value
-        // replace text
-        const innerTextArray = next.innerText.split(' ')
-        innerTextArray[5] = val
-        next.innerText = innerTextArray.join(' ')
-        // replace url
-        next.href = next.href.replace(/passage=*/, 'passage=' + val)
-    }
-
-    const onTrajectoryClick = () => {
-        const val = files.trajectory.value
-        // replace text
-        const innerTextArray = next.innerText.split(' ')
-        innerTextArray[8] = val
-        next.innerText = innerTextArray.join(' ')
-        //replace url
-        next.href = next.href.replace(/trajectory=*/, 'trajectory=' + val)
-    }
-    </script>
 {% endblock %}
