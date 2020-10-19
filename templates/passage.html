@@ -16,8 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     Object.keys(passages).forEach((i) => {
         const passage = passages[i];
-        ctx.moveTo(shift + passage.xbegin * power, shift + -passage.ybegin * power);
-        ctx.lineTo(shift + passage.xend * power, shift + -passage.yend * power)
+
+        // begin
+        ctx.moveTo(shift + passage.xbegin * power,
+            shift + -passage.ybegin * power);
+
+        // end
+        ctx.lineTo(shift + passage.xend * power,
+            shift + -passage.yend * power)
     })
 
     ctx.stroke();
