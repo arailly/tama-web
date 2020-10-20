@@ -1,41 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1 class="subtitle is-1">Home</h1>
-    <h2 class="subtitle is-2">Select Passage and Trajectory</h2>
-    <h3 class="subtitle is-3">Passages</h3>
-    <form id="files" action="result" method="get">
-    {% for passage_file in passage_files %}
-    <p>
-        <label for="passage">
-            <input
-                type="radio"
-                id="passage"
-                name="passage"
-                value="{{ passage_file }}"
-                required
-            >
-        </label>
-        {{ passage_file }}
-    </p>
-    {% endfor %}
+    <div class="container">
+        <p class="subtitle mt-5">Select Passage and Trajectory!</p>
+        <form id="files" action="result" method="get">
+            <main class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Passages</th>
+                            <th>Trajectories</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set n_passage_files = passage_files | length %}
+                        {% set n_trajectory_files = trajectory_files | length %}
+                        {% set n_rows = [n_passage_files, n_trajectory_files] | max %}
+                        {% for i in range(n_rows) %}
+                        <tr>
+                            {% if i < n_passage_files %}
+                                <td>
+                                    <label for="passage">
+                                        <input
+                                            type="radio"
+                                            id="passage"
+                                            name="passage"
+                                            value="{{ passage_files[i] }}"
+                                            required
+                                        >
+                                    </label>
+                                    {{ passage_files[i] }}
+                                </td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
 
-    <h3 class="subtitle is-3">Trajectories</h3>
-    {% for trajectory_file in trajectory_files %}
-    <p>
-        <label for="trajectory">
-            <input
-                type="radio"
-                id="trajectory"
-                name="trajectory"
-                value="{{ trajectory_file }}"
-                required
-            >
-        </label>
-        {{ trajectory_file }}
-    </p>
-    {% endfor %}
-    <p>
-        <input class="button" type="submit">
-    </p>
-    </form>
+                            {% if i < n_trajectory_files %}
+                                <td>
+                                    <label for="trajectory">
+                                        <input
+                                            type="radio"
+                                            id="trajectory"
+                                            name="trajectory"
+                                            value="{{ trajectory_files[i] }}"
+                                            required
+                                        >
+                                    </label>
+                                    {{ trajectory_files[i] }}
+                                </td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </main>
+            <p>
+                <input class="button" type="submit">
+            </p>
+        </form>
+    </div>
 {% endblock %}
