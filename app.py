@@ -24,7 +24,10 @@ def result():
     passage = h.Passage()
     passage_file = request.args.get('passage')
     passage.load(passage_file)
-    return render_template('passage.html', passage=passage.to_json())
+    return render_template(
+        'result.html',
+        passage=passage.to_json(),
+    )
 
 
 @app.route('/api/passages', methods=['GET', 'POST'])
