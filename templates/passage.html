@@ -7,6 +7,7 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
+        // draw passage
         const passages = {{ passage|tojson }}
 
         ctx.lineWidth = 10
@@ -14,17 +15,38 @@
         const shift = 50;
         const power = 80;
 
+        const x_min = Object.keys(passages).reduce(
+            (acc, cur) => {
+                const passage = passages[cur];
+                return Math.min(acc, passage.xbegin, passage.xend)
+            }, Infinity
+        );
+
+        const y_max = Object.keys(passages).reduce(
+            (acc, cur) => {
+                const passage = passages[cur];
+                return Math.max(acc, passage.ybegin, passage.yend)
+            }, -Infinity
+        );
+
         Object.keys(passages).forEach((i) => {
             const passage = passages[i];
 
             // begin
-            ctx.moveTo(shift + passage.xbegin * power,
-                shift + -passage.ybegin * power);
+            ctx.moveTo(
+                shift + (-x_min + passage.xbegin) * power,
+                shift + (y_max + -passage.ybegin) * power
+            );
 
             // end
-            ctx.lineTo(shift + passage.xend * power,
-                shift + -passage.yend * power)
+            ctx.lineTo(
+                shift + (-x_min + passage.xend) * power,
+                shift + (y_max + -passage.yend) * power
+            )
         })
+
+        // draw trajectory
+        const trajectory = {{ trajectory|tojson }}
 
         ctx.stroke();
     })
