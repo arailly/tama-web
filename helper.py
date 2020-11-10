@@ -31,12 +31,28 @@ def upload_trajectory_file(file):
     file.save(save_path)
 
 
-class Passage:
+class Data:
     def __init__(self):
         self.df = None
 
-    def load(self, file: str, **kwargs):
-        self.df = pd.read_csv(f'{passage_dir}/{file}', **kwargs)
+    def load(self, path: str, **kwargs):
+        self.df = pd.read_csv(path, **kwargs)
 
     def to_json(self) -> List[Dict]:
         return self.df.to_dict(orient='index')
+
+
+class Passage(Data):
+    def __init__(self):
+        super().__init__()
+
+    def load(self, file: str, **kwargs):
+        self.load(f'{passage_dir}/{file}')
+
+
+class Trajectory(Data):
+    def __init__(self):
+        super().__init__()
+
+    def load(self, file: str, **kwargs):
+        self.load(f'{trajectory_dir}/{file}')
