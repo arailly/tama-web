@@ -24,9 +24,15 @@ def result():
     passage = h.Passage()
     passage_file = request.args.get('passage')
     passage.load(passage_file)
+
+    trajectory = h.Trajectory()
+    trajectory_file = request.args.get('trajectory')
+    trajectory.load(trajectory_file)
+
     return render_template(
         'result.html',
         passage=passage.to_json(),
+        trajectory=trajectory.to_json(),
     )
 
 

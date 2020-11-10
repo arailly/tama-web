@@ -47,7 +47,7 @@ class Passage(Data):
         super().__init__()
 
     def load(self, file: str, **kwargs):
-        self.load(f'{passage_dir}/{file}')
+        super(Passage, self).load(f'{passage_dir}/{file}')
 
 
 class Trajectory(Data):
@@ -55,4 +55,4 @@ class Trajectory(Data):
         super().__init__()
 
     def load(self, file: str, **kwargs):
-        self.load(f'{trajectory_dir}/{file}')
+        super(Trajectory, self).load(f'{trajectory_dir}/{file}')

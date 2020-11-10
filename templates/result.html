@@ -46,7 +46,8 @@
         })
 
         // draw trajectory
-        const trajectory = {{ trajectory|tojson }}
+        const trajectory = {{ trajectory|tojson }};
+        console.log(trajectory)
 
         ctx.stroke();
     })
