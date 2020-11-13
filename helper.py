@@ -3,6 +3,7 @@ import os
 import datetime
 import pandas as pd
 from lib.mapmatching.TAMA.main import MapMatching
+from copy import copy, deepcopy
 
 
 passage_dir = 'data/passages'
@@ -59,7 +60,8 @@ class Trajectory(Data):
         super(Trajectory, self).load(f'{trajectory_dir}/{file}')
 
 
-def map_matching(passage: Passage, trajectory: Trajectory):
+def map_matching(passage: Passage, trajectory: Trajectory) -> Trajectory:
+    # convert passage coordinate
     passage_dict = passage.to_dict('list')
     links = list(map(
         lambda x: [x[0:2], x[2:4]],
@@ -71,6 +73,7 @@ def map_matching(passage: Passage, trajectory: Trajectory):
         )
     ))
 
+    # convert trajectory coordinate
     trajectory_dict = trajectory.to_dict('list')
     m = MapMatching(
         x=trajectory_dict['x'],
@@ -78,4 +81,14 @@ def map_matching(passage: Passage, trajectory: Trajectory):
         links=links
     )
 
-    return m.point_to_curve()
+    res = m.point_to_curve()
+
+    # convert map matching result into Trajectory class
+    xs = list(map(lambda x: x[0], res))
+    ys = list(map(lambda x: x[1], res))
+
+    modified = deepcopy(trajectory)
+    modified.df.x = xs
+    modified.df.y = ys
+
+    return modified

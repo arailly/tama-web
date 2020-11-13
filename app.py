@@ -35,7 +35,7 @@ def result():
         'result.html',
         passage=passage.to_dict('index'),
         trajectory=trajectory.to_dict('index'),
-        modified=modified
+        modified=modified.to_dict('index')
     )
 
 

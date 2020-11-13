@@ -77,7 +77,7 @@
             const cur_trajectory = modified[key];
             ctx.beginPath();
             ctx.arc(
-                ...convert(cur_trajectory[0], cur_trajectory[1]),
+                ...convert(cur_trajectory.x, cur_trajectory.y),
                 3, 0, 2 * Math.PI
             );
             ctx.stroke();
