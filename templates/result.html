@@ -55,9 +55,9 @@
 
         ctx.stroke();
 
+        // draw trajectory
         ctx.strokeStyle = "#3298dc";
 
-        // draw trajectory
         const trajectory = {{ trajectory|tojson }};
         Object.keys(trajectory).forEach((key) => {
             const cur_trajectory = trajectory[key];
@@ -67,9 +67,22 @@
                 3, 0, 2 * Math.PI
             );
             ctx.stroke();
-        })
+        });
 
-    })
+        // draw modified trajectory
+        ctx.strokeStyle = "orange";
+
+        const modified = {{ modified|tojson }};
+        Object.keys(modified).forEach((key) => {
+            const cur_trajectory = modified[key];
+            ctx.beginPath();
+            ctx.arc(
+                ...convert(cur_trajectory[0], cur_trajectory[1]),
+                3, 0, 2 * Math.PI
+            );
+            ctx.stroke();
+        });
+    });
     </script>
     </div>
 {% endblock %}

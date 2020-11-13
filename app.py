@@ -29,10 +29,13 @@ def result():
     trajectory_file = request.args.get('trajectory')
     trajectory.load(trajectory_file)
 
+    modified = h.map_matching(passage, trajectory)
+
     return render_template(
         'result.html',
-        passage=passage.to_json(),
-        trajectory=trajectory.to_json(),
+        passage=passage.to_dict('index'),
+        trajectory=trajectory.to_dict('index'),
+        modified=modified
     )
 
 
