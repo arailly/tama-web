@@ -3,6 +3,13 @@
     <div class="container">
     <canvas id="canvas" width="1600" height="1000"></canvas>
     <script>
+    const generate_converter = (x_min, y_max, power, shift) => {
+        return (x, y) => [
+            shift + (-x_min + x) * power,
+            shift + (y_max - y) * power
+        ]
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
@@ -13,7 +20,7 @@
         ctx.lineWidth = 10
 
         const shift = 50;
-        const power = 80;
+        const power = 50;
 
         const x_min = Object.keys(passages).reduce(
             (acc, cur) => {
@@ -29,27 +36,39 @@
             }, -Infinity
         );
 
-        Object.keys(passages).forEach((i) => {
-            const passage = passages[i];
+        console.log(x_min, y_max);
+
+        const convert = generate_converter(x_min, y_max, power, shift);
+
+        ctx.strokeStyle = "#242424";
+
+        Object.keys(passages).forEach((key) => {
+            const passage = passages[key];
 
             // begin
-            ctx.moveTo(
-                shift + (-x_min + passage.xbegin) * power,
-                shift + (y_max + -passage.ybegin) * power
-            );
+            ctx.moveTo(...convert(passage.xbegin, passage.ybegin));
 
             // end
-            ctx.lineTo(
-                shift + (-x_min + passage.xend) * power,
-                shift + (y_max + -passage.yend) * power
-            )
+            ctx.lineTo(...convert(passage.xend, passage.yend));
+
         })
+
+        ctx.stroke();
+
+        ctx.strokeStyle = "#3298dc";
 
         // draw trajectory
         const trajectory = {{ trajectory|tojson }};
-        console.log(trajectory)
+        Object.keys(trajectory).forEach((key) => {
+            const cur_trajectory = trajectory[key];
+            ctx.beginPath();
+            ctx.arc(
+                ...convert(cur_trajectory.x, cur_trajectory.y),
+                3, 0, 2 * Math.PI
+            );
+            ctx.stroke();
+        })
 
-        ctx.stroke();
     })
     </script>
     </div>
