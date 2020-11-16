@@ -6,6 +6,6 @@
 !pyvenv.cfg
 
 /data/trajectories/*
-!/data/trajectories/sample.csv
+!/data/trajectories/sample-trajectory.csv
 
 /data/modified/*
