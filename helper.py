@@ -20,8 +20,10 @@ def get_passage_files():
 
 
 def upload_passage_file(file):
-    save_path = f'{passage_dir}/passage-{get_now_str()}.csv'
+    save_name = f'passage-{get_now_str()}.csv'
+    save_path = f'{passage_dir}/{save_name}'
     file.save(save_path)
+    return save_name
 
 
 def get_trajectory_files():
@@ -29,34 +31,45 @@ def get_trajectory_files():
 
 
 def upload_trajectory_file(file):
-    save_path = f'{trajectory_dir}/trajectory-{get_now_str()}.csv'
+    save_name = f'trajectory-{get_now_str()}.csv'
+    save_path = f'{trajectory_dir}/{save_name}'
     file.save(save_path)
+    return save_name
 
 
 class Data:
     def __init__(self):
         self.df = None
+        self.path = ''
 
     def load(self, path: str, **kwargs):
+        self.path = path
         self.df = pd.read_csv(path, **kwargs)
 
     def to_dict(self, orient='dict'):
         return self.df.to_dict(orient=orient)
 
+    def save(self, path):
+        self.df.to_csv(path, index=False)
+
 
 class Passage(Data):
     def __init__(self):
         super().__init__()
+        self.filename = ''
 
     def load(self, file: str, **kwargs):
+        self.filename = file
         super(Passage, self).load(f'{passage_dir}/{file}')
 
 
 class Trajectory(Data):
     def __init__(self):
         super().__init__()
+        self.filename = ''
 
     def load(self, file: str, **kwargs):
+        self.filename = file
         super(Trajectory, self).load(f'{trajectory_dir}/{file}')
 
 

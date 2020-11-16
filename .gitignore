@@ -7,3 +7,5 @@
 
 /data/trajectories/*
 !/data/trajectories/sample.csv
+
+/data/modified/*

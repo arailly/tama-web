@@ -21,15 +21,20 @@ def api_index():
 
 @app.route('/result')
 def result():
+    # load passage
     passage = h.Passage()
     passage_file = request.args.get('passage')
     passage.load(passage_file)
 
+    # load trajectory
     trajectory = h.Trajectory()
     trajectory_file = request.args.get('trajectory')
     trajectory.load(trajectory_file)
 
+    # map matching
     modified = h.map_matching(passage, trajectory)
+    save_name = trajectory.path.replace('trajectories', 'modified')
+    modified.save(save_name)
 
     return render_template(
         'result.html',
