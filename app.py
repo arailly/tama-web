@@ -47,9 +47,11 @@ def api_passages():
         })
 
     elif request.method == 'POST':
-        f = request.files['passage_file']
+        f = request.files['passage']
         h.upload_passage_file(f)
-        return 'success'
+        return jsonify({
+            'message': 'success'
+        })
 
 
 @app.route('/api/trajectories', methods=['GET', 'POST'])
@@ -60,9 +62,11 @@ def api_trajectories():
         })
 
     elif request.method == 'POST':
-        f = request.files['trajectory_file']
+        f = request.files['trajectory']
         h.upload_trajectory_file(f)
-        return 'success'
+        return jsonify({
+            'message': 'success'
+        })
 
 
 if __name__ == '__main__':
