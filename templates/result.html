@@ -2,7 +2,7 @@
 {% block content %}
 
     <div class="container">
-        <canvas id="canvas" width="1600" height="600"></canvas>
+        <canvas id="canvas" class="is-centered"></canvas>
 
         <div class="columns is-centered">
             <div class="column has-text-centered">
@@ -53,6 +53,11 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         const canvas = document.getElementById('canvas');
+        canvas.width = document.documentElement.clientWidth - 400;
+        canvas.height = document.documentElement.clientHeight - 300;
+
+        console.log(canvas.width)
+
         const ctx = canvas.getContext('2d');
 
         const color_dark = "#242424";
@@ -66,7 +71,6 @@
         ctx.lineWidth = 10
 
         const shift = 50;
-        const power = 50;
 
         const x_min = Object.keys(passages).reduce(
             (acc, cur) => {
@@ -75,11 +79,30 @@
             }, Infinity
         );
 
+        const x_max = Object.keys(passages).reduce(
+            (acc, cur) => {
+                const passage = passages[cur];
+                return Math.max(acc, passage.xbegin, passage.xend)
+            }, -Infinity
+        );
+
+        const y_min = Object.keys(passages).reduce(
+            (acc, cur) => {
+                const passage = passages[cur];
+                return Math.min(acc, passage.ybegin, passage.yend)
+            }, Infinity
+        );
+
         const y_max = Object.keys(passages).reduce(
             (acc, cur) => {
                 const passage = passages[cur];
                 return Math.max(acc, passage.ybegin, passage.yend)
             }, -Infinity
+        );
+
+        const power = Math.min(
+            canvas.width / (x_max - x_min) * 0.9,
+            canvas.height / (y_max - y_min) * 0.9
         );
 
         const convert = generate_converter(x_min, y_max, power, shift);
