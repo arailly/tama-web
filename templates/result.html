@@ -6,19 +6,40 @@
 
         <div class="columns is-centered">
             <div class="column has-text-centered">
-                <button class="button is-dark">
+                <a
+                        class="button is-dark"
+                        href="{{ url_for(
+                            'download_data',
+                            path='passages/' +
+                            request.args.get('passage')
+                        ) }}"
+                >
                     Download Passage
-                </button>
+                </a>
             </div>
             <div class="column has-text-centered">
-                <button class="button is-info">
+                <a
+                        class="button is-info"
+                        href="{{ url_for(
+                            'download_data',
+                            path='trajectories/' +
+                            request.args.get('trajectory')
+                        ) }}"
+                >
                     Download Original Trajectory
-                </button>
+                </a>
             </div>
             <div class="column has-text-centered">
-                <button class="button is-danger">
+                <a
+                        class="button is-danger"
+                        href="{{ url_for(
+                            'download_data',
+                            path='modified/' +
+                            request.args.get('trajectory')
+                        ) }}"
+                >
                     Download Modified Trajectory
-                </button>
+                </a>
             </div>
         </div>
     </div>

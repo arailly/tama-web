@@ -76,7 +76,6 @@ def api_trajectories():
 
 @app.route('/data/<path:path>')
 def download_data(path):
-    print(path)
     return send_file(
         filename_or_fp=f'data/{path}',
         mimetype='text/plain',
