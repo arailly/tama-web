@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_file
 import helper as h
 
 app = Flask(__name__)
@@ -72,6 +72,16 @@ def api_trajectories():
         return jsonify({
             'message': 'success'
         })
+
+
+@app.route('/data/<path:path>')
+def download_data(path):
+    print(path)
+    return send_file(
+        filename_or_fp=f'data/{path}',
+        mimetype='text/plain',
+        as_attachment=True,
+    )
 
 
 if __name__ == '__main__':
