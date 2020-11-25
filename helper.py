@@ -30,6 +30,12 @@ def get_trajectory_files():
     return os.listdir(trajectory_dir)
 
 
+def get_new_trajectory_path():
+    save_name = f'trajectory-{get_now_str()}.csv'
+    save_path = f'{trajectory_dir}/{save_name}'
+    return save_path
+
+
 def upload_trajectory_file(file):
     save_name = f'trajectory-{get_now_str()}.csv'
     save_path = f'{trajectory_dir}/{save_name}'

@@ -67,11 +67,21 @@ def api_trajectories():
         })
 
     elif request.method == 'POST':
-        f = request.files['trajectory']
-        h.upload_trajectory_file(f)
-        return jsonify({
-            'message': 'success'
-        })
+        try:
+            trajectory = request.json['trajectory']
+            path = h.get_new_trajectory_path()
+
+            with open(path, 'w') as f:
+                f.write(trajectory)
+
+            return jsonify({
+                'message': 'success'
+            })
+
+        except Exception as e:
+            return jsonify({
+                'message': e
+            }), 400
 
 
 @app.route('/data/<path:path>')
