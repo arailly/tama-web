@@ -5,7 +5,7 @@ setuptools.setup(
     version="1.0",
     author="yuusuke arai","takuma kaiho","kenta murakami"
     author_email="kaiho.takuma@ist.osaka-u.ac.jp",
-    description="TAMA is mapmatching python package",
+    description="TAMA is map-matching python package",
     long_description="",
     long_description_content_type="text/markdown",
     url="",
